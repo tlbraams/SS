@@ -7,7 +7,6 @@ package ss.week3.pw;
  */
 public class Password {
 	
-	public static final String INITIAL = "banaan";
 	private String pass;
 	private Checker checker;
 	private String factoryPassword;

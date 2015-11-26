@@ -1,13 +1,34 @@
 package ss.week3.hotel;
 
-public class PricedRoom implements Bill.Item {
+public class PricedRoom extends Room implements Bill.Item {
 
-	public PricedRoom(int i, double d, int j) {
-		
+	private double price;
+	
+	// ------ Constructor: -------
+	
+	/**
+	 * Creates a new <code>PricedRoom</code> with the given number, price and safe price.
+	 * @param roomNumber the room number
+	 * @param roomPrice the room price
+	 * @param safePrice the safe price
+	 */
+	public PricedRoom(int roomNumber, double roomPrice, double safePrice) {
+		super(roomNumber, new PricedSafe(safePrice));
+		this.price = roomPrice;
 	}
 
+	/**
+	 * Gives the price of staying in this <code>PricedRoom</code> for one night.
+	 */
 	@Override
-	public int getAmount() {
-		return 0;
+	public double getAmount() {
+		return price;
+	}
+	
+	/**
+	 * Gives a textual representation of this <code>PricedRoom</code>.
+	 */
+	public String toString() {
+		return "Price per night: " + price;
 	}
 }

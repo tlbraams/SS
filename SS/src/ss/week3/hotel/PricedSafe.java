@@ -1,12 +1,33 @@
 package ss.week3.hotel;
 
-public class PricedSafe implements Bill.Item {
+public class PricedSafe extends Safe implements Bill.Item {
 
-	public PricedSafe(double d) {
-		
+	private double safePrice;
+	
+	// ----- Constructors: -----
+	
+	/**
+	 * Creates a new <code>PricedSafe</code> with the given price.
+	 * @param price the price
+	 */
+	public PricedSafe(double price) {
+		super();
+		safePrice = price;
 	}
 	
-	public int getAmount() {
-		return 0;
+	// ----- Queries: ------
+	
+	/**
+	 * Gives the price of the <code>PricedSafe</code>.
+	 */
+	/*@ pure */ public double getAmount() {
+		return safePrice;
+	}
+	
+	/**
+	 * Gives a textual representation of the price of this <code>PricedSafe</code>.
+	 */
+	public String toString() {
+		return "Price: " + safePrice;
 	}
 }
