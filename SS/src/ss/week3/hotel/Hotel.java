@@ -207,6 +207,17 @@ public class Hotel {
 				||	result == null);
 	}
 	
+	/**
+	 * Prints a <code>Bill</code> for the number of nights the <code>Guest</code>
+	 * 		stayed in the room and for the activation of the <code>Safe</code>
+	 * 			if it is a PricedSafe.
+	 * @param guestname the name of the <code>Guest</code>
+	 * 						 for whom the <code>Bill</code> is printed.
+	 * @param nights the amount of nights the <code>Guest</code> stayed.
+	 * @param outStream the <code>PrintStream</code> where the <code>Bill</code> should be printed.
+	 * @return the <code>Bill</code> or null if there is no <code>Guest</code> with the given name
+	 * 			or the <code>Guest</code> stayed in a free room.
+	 */
 	public Bill getBill(String guestname, int nights, PrintStream outStream) {
 		Bill result = null;
 		Room kamer = getRoom(guestname);
@@ -218,8 +229,7 @@ public class Hotel {
 			Safe safe = kamer.getSafe();
 			if (safe instanceof PricedSafe && safe.isActive()) {
 				result.newItem((PricedSafe) safe);
-			}
-			
+			}	
 		}
 		return result;
 	}

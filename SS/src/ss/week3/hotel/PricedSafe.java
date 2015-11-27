@@ -10,6 +10,9 @@ public class PricedSafe extends Safe implements Bill.Item {
 	 * Creates a new <code>PricedSafe</code> with the given price.
 	 * @param price the price
 	 */
+	/*@
+	 	ensures this.getAmount() == price;
+	 */
 	public PricedSafe(double price) {
 		super();
 		safePrice = price;
@@ -28,6 +31,6 @@ public class PricedSafe extends Safe implements Bill.Item {
 	 * Gives a textual representation of the price of this <code>PricedSafe</code>.
 	 */
 	public String toString() {
-		return "Price: " + safePrice;
+		return "Safe price: " + safePrice;
 	}
 }

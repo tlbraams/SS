@@ -12,6 +12,10 @@ public class PricedRoom extends Room implements Bill.Item {
 	 * @param roomPrice the room price
 	 * @param safePrice the safe price
 	 */
+	/*@
+	 	ensures this.getAmount() == roomPrice;
+	 	ensures this.getNumber() == roomNumber;
+	 */
 	public PricedRoom(int roomNumber, double roomPrice, double safePrice) {
 		super(roomNumber, new PricedSafe(safePrice));
 		this.price = roomPrice;
@@ -21,7 +25,7 @@ public class PricedRoom extends Room implements Bill.Item {
 	 * Gives the price of staying in this <code>PricedRoom</code> for one night.
 	 */
 	@Override
-	public double getAmount() {
+	/*@ pure */public double getAmount() {
 		return price;
 	}
 	
