@@ -23,6 +23,7 @@ public class PricedSafe extends Safe implements Bill.Item {
 	/**
 	 * Gives the price of the <code>PricedSafe</code>.
 	 */
+	@Override
 	/*@ pure */ public double getAmount() {
 		return safePrice;
 	}
@@ -30,6 +31,7 @@ public class PricedSafe extends Safe implements Bill.Item {
 	/**
 	 * Gives a textual representation of the price of this <code>PricedSafe</code>.
 	 */
+	@Override
 	public String toString() {
 		return "Safe price: " + safePrice;
 	}

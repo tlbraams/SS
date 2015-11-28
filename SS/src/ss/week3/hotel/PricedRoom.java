@@ -32,6 +32,7 @@ public class PricedRoom extends Room implements Bill.Item {
 	/**
 	 * Gives a textual representation of this <code>PricedRoom</code>.
 	 */
+	@Override
 	public String toString() {
 		return "Price per night: " + price;
 	}

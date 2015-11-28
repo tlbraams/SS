@@ -31,4 +31,13 @@ public class DollarsAndCentsCounter {
 		dollar = 0; cent = 0;
 	}
 	
+	public static void main(String[] args) {
+		DollarsAndCentsCounter dc = new DollarsAndCentsCounter();
+		System.out.println(dc.dollars());
+		dc.add(5, 60);
+		System.out.println("Dollars: " + dc.dollars() + " and Cents: " + dc.cents());
+		dc.add(0, 45);
+		System.out.println("Dollars: " + dc.dollars() + " and Cents: " + dc.cents());
+	}
+	
 }
