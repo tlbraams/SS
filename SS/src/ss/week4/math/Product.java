@@ -17,7 +17,7 @@ public class Product implements Function {
 
 	@Override
 	public Function derivative() {
-		return ;
+		return new Sum(new Product(one.derivative(), two), new Product(two.derivative(), one));
 	}
 
 }
