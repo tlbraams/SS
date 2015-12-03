@@ -1,13 +1,13 @@
 package ss.week4.math;
 
-public class Sum implements Function {
+public class Sum implements Function, Integrandable {
 	
 	private Function one;
 	private Function two;
 
-	public Sum(Function first, Function second) {
-		one = first;
-		two = second;
+	public Sum(Function fone, Function ftwo) {
+		one = fone;
+		two = ftwo;
 	}
 	
 	@Override
@@ -23,6 +23,16 @@ public class Sum implements Function {
 	@Override
 	public String toString() {
 		return one.toString() + two.toString();
+	}
+	
+	@Override
+	public Function integrand() {
+		Sum result = null;
+		if (one instanceof Integrandable && two instanceof Integrandable) {
+			result = new Sum((Function) (((Integrandable) one).integrand()),
+							(Function) (((Integrandable) two).integrand()));
+		}
+		return result;
 	}
 
 }

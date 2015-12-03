@@ -2,12 +2,12 @@ package ss.week4.math;
 
 public class Product implements Function {
 	
-	private Function one;
-	private Function two;
+	protected Function one;
+	protected Function two;
 	
-	public Product(Function first, Function second) {
-		one = first;
-		two = second;
+	public Product(Function fone, Function ftwo) {
+		one = fone;
+		two = ftwo;
 	}
 
 	@Override
