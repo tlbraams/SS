@@ -39,5 +39,14 @@ public class Polynomial implements Function, Integrandable {
 		}
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		String result = polynomial[0].toString();
+		for (int i = 1; i < polynomial.length; i++) {
+			result += " + " + polynomial[i].toString();
+		}
+		return result;
+	}
 
 }

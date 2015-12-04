@@ -24,7 +24,7 @@ public class Constant implements Function, Integrandable {
 	}
 	
 	public String toString() {
-		return "Value: " + constant;
+		return "" + constant;
 	}
 
 	@Override

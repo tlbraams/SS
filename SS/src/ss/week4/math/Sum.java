@@ -22,7 +22,7 @@ public class Sum implements Function, Integrandable {
 	
 	@Override
 	public String toString() {
-		return one.toString() + two.toString();
+		return one.toString() + " + " + two.toString();
 	}
 	
 	@Override

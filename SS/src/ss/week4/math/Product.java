@@ -19,5 +19,10 @@ public class Product implements Function {
 	public Function derivative() {
 		return new Sum(new Product(one.derivative(), two), new Product(two.derivative(), one));
 	}
+	
+	@Override
+	public String toString() {
+		return one.toString() + " * " + two.toString();
+	}
 
 }

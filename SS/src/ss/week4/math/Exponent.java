@@ -23,6 +23,11 @@ public class Exponent implements Function, Integrandable {
 	}
 	
 	@Override
+	public String toString() {
+		return "x^" + exponent;
+	}
+	
+	@Override
 	public Function integrand() {
 		return new LinearProduct(new Constant(1.0 / (exponent + 1)), new Exponent(exponent + 1));
 	}
