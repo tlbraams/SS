@@ -5,8 +5,8 @@ import java.util.*;
 public class MergeSort {
     public static <Elem extends Comparable<Elem>> void mergesort(List<Elem> list) {
     	if (list.size() > 1) {
-    		List<Elem> leftlist = list.subList(0, list.size() / 2);
-    		List<Elem> rightlist = list.subList(list.size() / 2, list.size() - 1);
+    		List<Elem> leftlist = new ArrayList<>(list.subList(0, list.size() / 2));
+    		List<Elem> rightlist = new ArrayList<>(list.subList(list.size() / 2, list.size()));
     		mergesort(leftlist);
     		mergesort(rightlist);
     		merge(leftlist, rightlist, list);
@@ -18,10 +18,10 @@ public class MergeSort {
     	int i = 0, j = 0;
     	int index = 0;
     	while (i < leftlist.size() && j < rightlist.size()) {
-    		if (leftlist.get(i).compareTo(rightlist.get(j)) <= 0) {
+    		if (leftlist.get(i).compareTo(rightlist.get(j)) < 0) {
     			list.set(index, leftlist.get(i));
     			i++; index++;
-    		} else if (leftlist.get(i).compareTo(rightlist.get(j)) > 0) {
+    		} else {
     			list.set(index, rightlist.get(j));
     			j++; index++;
     		}
@@ -35,4 +35,5 @@ public class MergeSort {
     		j++; index++;
     	}
     }
+    
 }
