@@ -6,7 +6,7 @@ public class MergeSort {
     public static <Elem extends Comparable<Elem>> void mergesort(List<Elem> list) {
     	if (list.size() > 1) {
     		List<Elem> leftlist = list.subList(0, list.size() / 2);
-    		List<Elem> rightlist = list.subList((list.size() / 2) + 1, list.size() - 1);
+    		List<Elem> rightlist = list.subList(list.size() / 2, list.size() - 1);
     		mergesort(leftlist);
     		mergesort(rightlist);
     		merge(leftlist, rightlist, list);
