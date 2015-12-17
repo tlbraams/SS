@@ -46,12 +46,12 @@ public class CardTest {
         }
     }
 
-    /** Test for writing and reading a card with data files.
+    /** Test for writing and reading a card with data files.*/
     @Test
     public void testReadingWritingData() {
         try {
             DataOutputStream dataOut = 
-            			new DataOutputStream(new FileOutputStream(PATH + "card.dat"));
+            				new DataOutputStream(new FileOutputStream(PATH + "card.dat"));
             card.write(dataOut);
             dataOut.close();
 
@@ -63,19 +63,19 @@ public class CardTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
-    /** Test for writing and reading a card with object files.
+    /** Test for writing and reading a card with object files.*/
     @Test
     public void testReadingWritingObject() {
         try {
             ObjectOutputStream objectOut = 
-            		new ObjectOutputStream(new FileOutputStream(PATH + "card.obj"));
+            				new ObjectOutputStream(new FileOutputStream(PATH + "card.obj"));
             card.write(objectOut);
             objectOut.close();
 
             ObjectInputStream objectIn = 
-            		new ObjectInputStream(new FileInputStream(PATH + "card.obj"));
+            				new ObjectInputStream(new FileInputStream(PATH + "card.obj"));
             Card card2 = Card.read(objectIn);
             objectIn.close();
             assertEquals(card, card2);
@@ -83,5 +83,5 @@ public class CardTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

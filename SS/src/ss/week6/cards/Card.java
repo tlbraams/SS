@@ -1,16 +1,26 @@
 package ss.week6.cards;
 
 import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Card {
+public class Card implements Serializable {
 
 	// ---- constants -----------------------------------
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2117471912499707549L;
 	// ranks are 2, ..., 9 and:
 	public static final char JACK = 'J';
 	public static final char QUEEN = 'Q';
@@ -330,6 +340,7 @@ public class Card {
 		p.flush();
 	}
 	
+	
 	public static Card read(BufferedReader in) throws EOFException {
 		Card result = null;
 		String line;
@@ -349,6 +360,47 @@ public class Card {
 		if (Card.isValidSuit(Card.suitString2Char(suit)) 
 						&& Card.isValidRank(Card.rankString2Char(rank))) {
 			result = new Card(Card.suitString2Char(suit), Card.rankString2Char(rank));
+		}
+		return result;
+	}
+	
+	public void write(DataOutput out) throws IOException {
+		out.writeChar((int) this.getSuit());
+		out.writeChar((int) this.getRank());
+	}
+	
+	public static Card read(DataInput in) throws EOFException {
+		Card result = null;
+		char rank = 0;
+		char suit = 0;
+		try {
+			suit = in.readChar();
+			rank = in.readChar();
+		} catch (IOException e) {
+			return result;
+		}
+		if (rank == 0 || suit == 0) {
+			throw new EOFException();
+		}
+		result = new Card(suit, rank);
+		return result;
+	}
+	
+	public void write(ObjectOutput out) throws IOException {
+		out.writeObject((Object) this);
+	}
+	
+	public static Card read(ObjectInput in) throws EOFException {
+		Card result = null;
+		try {
+			result = (Card) in.readObject();
+		} catch (IOException e) {
+			return result;
+		} catch (ClassNotFoundException e) {
+			return result;
+		}
+		if (result == null) {
+			throw new EOFException();
 		}
 		return result;
 	}
