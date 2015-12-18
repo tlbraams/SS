@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Hello {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String answer;
 		do {
@@ -13,7 +12,7 @@ public class Hello {
 			answer = in.nextLine();
 			System.out.println("Hello " + answer);
 		} while (!answer.equals(""));
-		
+		in.close();
 
 	}
 

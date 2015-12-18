@@ -34,7 +34,7 @@ public class VoteGUIView implements VoteView {
 			String line = readString("What is your command? ");
 			String[] words = line.split(" ");
 			if (words.length == 3 && words[0].equals("ADD")
-					&& words[1].equals("PARTY")) {
+							&& words[1].equals("PARTY")) {
 				this.voteMachine.addParty(words[2]);
 			} else if (words.length == 1 && words[0].equals("PARTIES")) {
 				this.voteMachine.getParties();

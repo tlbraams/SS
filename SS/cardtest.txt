@@ -1,0 +1,4 @@
+Diamonds king 
+Spades ace 
+Clubs jack 
+Hearts 10 

@@ -382,7 +382,9 @@ public class Card implements Serializable {
 		if (rank == 0 || suit == 0) {
 			throw new EOFException();
 		}
-		result = new Card(suit, rank);
+		if (isValidRank(rank) && isValidSuit(suit)) {
+			result = new Card(suit, rank);
+		}
 		return result;
 	}
 	

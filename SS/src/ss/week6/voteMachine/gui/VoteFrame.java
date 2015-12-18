@@ -13,6 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class VoteFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String INIT_MESSAGE = "(Choose a party)";
 	// Graphical components components
 	private JComboBox partyChoice;
@@ -57,13 +61,14 @@ public class VoteFrame extends JFrame {
 					okButton.setEnabled(false);
 				}
 			}
-		});
+		}
+		);
 
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VoteFrame.this.view.getVoteMachine().vote(
-						(String) partyChoice.getSelectedItem());
+								(String) partyChoice.getSelectedItem());
 				partyChoice.setSelectedIndex(0);
 				messageLabel.setText("Make your choice");
 				okButton.setEnabled(false);
@@ -74,7 +79,7 @@ public class VoteFrame extends JFrame {
 
 	/**
 	 * Ververst de lijst partijen in de <code>Choice</code> op basis van de
-	 * waargenomen verandering in de <code>Uitslag</code>
+	 * waargenomen verandering in de <code>Uitslag</code>.
 	 */
 	public void update(List<String> parties) {
 		partyChoice.setEnabled(false);

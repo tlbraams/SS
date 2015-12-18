@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Words {
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter a sentence:");
@@ -23,6 +22,8 @@ public class Words {
 				count++;
 			} while (inputString.hasNext());
 		}
+		inputString.close();
+		in.close();
 		
 	}
 }
