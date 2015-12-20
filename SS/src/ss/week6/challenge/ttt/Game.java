@@ -7,8 +7,7 @@ package ss.week6.challenge.ttt;
  * @author Theo Ruys en Arend Rensink
  * @version $Revision: 1.4 $
  */
-public class Game
-{
+public class Game {
 
     // -- Instance variables -----------------------------------------
 
