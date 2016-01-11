@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
- * Peer for a simple client-server application
+ * Peer for a simple client-server application.
  * @author  Theo Ruys
  * @version 2005.02.21
  */
@@ -29,8 +29,12 @@ public class Peer implements Runnable {
      * @param   nameArg name of the Peer-proces
      * @param   sockArg Socket of the Peer-proces
      */
-    public Peer(String nameArg, Socket sockArg) throws IOException
-    {
+    public Peer(String nameArg, Socket sockArg) throws IOException {
+    	this.name = nameArg;
+    	this.sock = sockArg;
+    	in = new BufferedReader(new InputStreamReader(System.in));
+    	out = new BufferedWriter(new OutputStreamWriter(System.out));
+    	
     }
 
     /**
@@ -38,6 +42,17 @@ public class Peer implements Runnable {
      * writes the characters to the default output.
      */
     public void run() {
+    	BufferedReader input;
+    	try {
+    		input = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+    		while (true) {
+    			String line = input.readLine();
+    			out.write(line);
+    			out.flush();
+    		}
+    	} catch (IOException e) {
+    		System.err.println(e.getMessage());
+    	}
     }
 
 
@@ -47,20 +62,44 @@ public class Peer implements Runnable {
      * On Peer.EXIT the method ends
      */
     public void handleTerminalInput() {
+    	BufferedWriter output;
+    	Boolean doorgaan = true;
+    	try {
+    		output = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+    		while (doorgaan) {
+    			String line = in.readLine();
+    			if (line.equals("exit")) {
+    				doorgaan = false;
+    				shutDown();
+    			} else {
+    				output.write(line);
+    				output.flush();
+    			}
+    		}
+    	} catch (IOException e) {
+    		System.err.println(e);
+    	}
     }
 
     /**
-     * Closes the connection, the sockets will be terminated
+     * Closes the connection, the sockets will be terminated.
      */
     public void shutDown() {
+    	try {
+    		sock.getInputStream().close();
+    		sock.getOutputStream().close();
+    		sock.close();
+    	} catch (IOException e) {
+    		System.err.println(e);
+    	}
     }
 
-    /**  returns name of the peer object*/
+    /**  returns name of the peer object. */
     public String getName() {
         return name;
     }
 
-    /** read a line from the default input */
+    /** read a line from the default input. */
     static public String readString(String tekst) {
         System.out.print(tekst);
         String antw = null;

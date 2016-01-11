@@ -9,11 +9,23 @@ public class ConcatThread extends Thread {
     }
 
     public void run() {
-        text = text.concat(toe);
+    	synchronized (text) {
+    		text = text.concat(toe);
+    	}
     }
 
     public static void main(String[] args) {
-        (new ConcatThread("one;")).start();
-        (new ConcatThread("two;")).start();
+    	Thread one = new ConcatThread("one;");
+    	Thread two = new ConcatThread("two;");
+        one.start();
+        two.start();
+        
+        try {
+        	one.join();
+        	two.join();
+        } catch (InterruptedException e) {
+        	System.err.println(e.getMessage());
+        }
+        System.out.println(text);
     }
 }
