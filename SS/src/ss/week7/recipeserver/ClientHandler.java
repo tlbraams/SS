@@ -14,12 +14,12 @@ import java.net.Socket;
 
 public class ClientHandler extends Thread {
     private BufferedReader in;
-    private BufferedWriter out;
+    private BufferedWriter output;
     private Socket sock;
     
     public ClientHandler(Socket sock) throws IOException {
         in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-        out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+        output = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
         this.sock = sock;
     }
     
@@ -28,9 +28,9 @@ public class ClientHandler extends Thread {
         try {
             msg = in.readLine();
             while (msg != null) {
-            	handleCommand(msg, out);
-                out.newLine();
-                out.flush();
+            	handleCommand(msg, output);
+                output.newLine();
+                output.flush();
                 msg = in.readLine();                
             }
             shutdown();
@@ -43,7 +43,7 @@ public class ClientHandler extends Thread {
     final static String LIST_COMMAND = "LIST";
     final static String GET_COMMAND = "GET";
     /**
-     * Handle server commands
+     * Handle server commands.
      * @param msg command from client
      * @param out Writer to to write the result to.
      * @throws IOException 
@@ -52,7 +52,7 @@ public class ClientHandler extends Thread {
     	if (msg.equals(LIST_COMMAND)) {
     		System.out.println("Listing recipes.");
     		listRecipes(out);
-    	} else if (msg.startsWith(GET_COMMAND + " ")){
+    	} else if (msg.startsWith(GET_COMMAND + " ")) {
     		System.out.println("Showing recipe.");
     		String recipeName = msg.substring(GET_COMMAND.length() + 1);
     		showRecipe(recipeName, out);

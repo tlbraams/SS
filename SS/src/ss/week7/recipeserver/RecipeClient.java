@@ -85,7 +85,8 @@ public class RecipeClient {
             do {
                 System.out.println("Available recipes on server:");
             	for (int i = 0; i < recipeNames.size(); i++) {
-            		System.out.printf("%3d: %s" + System.lineSeparator(),i+1, recipeNames.get(i));
+            		System.out.printf("%3d: %s" + System.lineSeparator(), i + 1,
+            						recipeNames.get(i));
 				}
 	            System.out.print("Enter recipe number (or 0 to exit): ");
 	            System.out.flush();
@@ -95,8 +96,8 @@ public class RecipeClient {
 	            	System.out.println("Invalid input, try again.");
 	            	userIn.next();
 	            }
-	            if (rNum > 0 && rNum < recipeNames.size()+1) {
-		            out.write("GET " + recipeNames.get(rNum-1));
+	            if (rNum > 0 && rNum < recipeNames.size() + 1) {
+		            out.write("GET " + recipeNames.get(rNum - 1));
 		            out.newLine();
 		            out.flush();
 		            System.out.println("Recipe text:");

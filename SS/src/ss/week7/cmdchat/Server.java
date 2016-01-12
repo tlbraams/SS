@@ -3,8 +3,8 @@ package ss.week7.cmdchat;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Server. 
@@ -30,9 +30,11 @@ public class Server {
 
     private int port;
     private List<ClientHandler> threads;
-    /** Constructs a new Server object */
+    
+    /** Constructs a new Server object. */
     public Server(int portArg) {
-        // TODO insert body
+        port = portArg;
+        threads = new ArrayList<ClientHandler>();
     }
     
     /**
@@ -42,10 +44,26 @@ public class Server {
      * communication with the Client.
      */
     public void run() {
-        // TODO insert body
+    	try {
+			@SuppressWarnings("resource")
+			ServerSocket ssock = new ServerSocket(port);
+			while (true) {
+				System.out.println("Waiting for new client.");
+				Socket sock = ssock.accept();
+				System.out.println("Received new connection.");
+				ClientHandler handler = new ClientHandler(this, sock);
+				addHandler(handler);
+				handler.start();
+				handler.announce();
+				System.out.println("Received new client.");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
     }
     
-    public void print(String message){
+    public void print(String message) {
         System.out.println(message);
     }
     
@@ -55,7 +73,10 @@ public class Server {
      * @param msg message that is send
      */
     public void broadcast(String msg) {
-        // TODO insert body
+    	print(msg);
+        for (ClientHandler c: threads) {
+        	c.sendMessage(msg);
+        }
     }
     
     /**
@@ -63,7 +84,7 @@ public class Server {
      * @param handler ClientHandler that will be added
      */
     public void addHandler(ClientHandler handler) {
-        // TODO insert body
+    	threads.add(handler);
     }
     
     /**
@@ -71,6 +92,6 @@ public class Server {
      * @param handler ClientHandler that will be removed
      */
     public void removeHandler(ClientHandler handler) {
-        // TODO insert body
+    	threads.remove(handler);
     }
 }

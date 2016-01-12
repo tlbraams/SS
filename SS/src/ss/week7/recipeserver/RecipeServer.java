@@ -18,16 +18,16 @@ public class RecipeServer extends Thread {
     
     public void run() {
         try {
-        	ServerSocket ssock = new ServerSocket(port,0,InetAddress.getByName("127.0.0.1"));
+        	ServerSocket ssock = new ServerSocket(port, 0, InetAddress.getByName("127.0.0.1"));
         	// If you want external hosts (i.e., not this computer) to connect to 
         	// this server you can use the following line instead. However, be careful 
         	// with that as this recipe server has some security issues!
         	// ServerSocket ssock = new ServerSocket(port);
             while (true) {
-                 Socket sock = ssock.accept();
-                 System.out.println("Client connected!");
-                 ClientHandler handler = new ClientHandler(sock);
-                 handler.start();
+                Socket sock = ssock.accept();
+                System.out.println("Client connected!");
+                ClientHandler handler = new ClientHandler(sock);
+                handler.start();
             }
         } catch (IOException e) {
             e.printStackTrace();

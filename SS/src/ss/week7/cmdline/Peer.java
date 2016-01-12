@@ -32,8 +32,8 @@ public class Peer implements Runnable {
     public Peer(String nameArg, Socket sockArg) throws IOException {
     	this.name = nameArg;
     	this.sock = sockArg;
-    	in = new BufferedReader(new InputStreamReader(System.in));
-    	out = new BufferedWriter(new OutputStreamWriter(System.out));
+    	in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+    	out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
     	
     }
 
@@ -42,13 +42,10 @@ public class Peer implements Runnable {
      * writes the characters to the default output.
      */
     public void run() {
-    	BufferedReader input;
     	try {
-    		input = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-    		while (true) {
-    			String line = input.readLine();
-    			out.write(line);
-    			out.flush();
+    		String line;
+    		while ((line  = in.readLine()) != null) {
+    			System.out.println(line);
     		}
     	} catch (IOException e) {
     		System.err.println(e.getMessage());
@@ -62,18 +59,17 @@ public class Peer implements Runnable {
      * On Peer.EXIT the method ends
      */
     public void handleTerminalInput() {
-    	BufferedWriter output;
-    	Boolean doorgaan = true;
     	try {
-    		output = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+    		boolean doorgaan = true;
+    		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     		while (doorgaan) {
-    			String line = in.readLine();
+    			String line = input.readLine();
     			if (line.equals("exit")) {
     				doorgaan = false;
-    				shutDown();
     			} else {
-    				output.write(line);
-    				output.flush();
+    				out.write(line);
+    				out.newLine();
+    				out.flush();
     			}
     		}
     	} catch (IOException e) {

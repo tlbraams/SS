@@ -1,3 +1,8 @@
+package ss.week7.challenge.chatbox;
+
+import java.awt.event.ActionListener;
+
+
 public class ServerGUI extends JFrame implements ActionListener, MessageUI {
 	private JButton bConnect;
 	private JTextField tfPort;
@@ -65,7 +70,7 @@ public class ServerGUI extends JFrame implements ActionListener, MessageUI {
 		cc.add(p2);
 	}
 
-	/** returns the Internetadress of this computer */
+	/** returns the Internetadress of this computer. */
 	private String getHostAddress() {
 		try {
 			InetAddress iaddr = InetAddress.getLocalHost();
@@ -76,7 +81,7 @@ public class ServerGUI extends JFrame implements ActionListener, MessageUI {
 	}
 
 	/**
-	 * listener for the "Start Listening" button
+	 * listener for the "Start Listening" button.
 	 */
 	public void actionPerformed(ActionEvent ev) {
 		Object src = ev.getSource();
@@ -108,12 +113,12 @@ public class ServerGUI extends JFrame implements ActionListener, MessageUI {
 		addMessage("Started listening on port " + port + "...");
 	}
 
-	/** add a message to the textarea  */
+	/** add a message to the textarea.  */
 	public void addMessage(String msg) {
 		taMessages.append(msg + "\n");
 	}
 
-	/** Start a ServerGUI application */
+	/** Start a ServerGUI application. */
 	public static void main(String[] args) {
 		new ServerGUI();
 	}

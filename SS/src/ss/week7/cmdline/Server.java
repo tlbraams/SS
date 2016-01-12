@@ -43,12 +43,17 @@ public class Server {
     	}
     	
     	try {
-    		clientSock = sock.accept();
-    		Peer server = new Peer(name, clientSock);
-    		Thread streamInputHandler = new Thread(server);
-            streamInputHandler.start();
-            server.handleTerminalInput();
-            server.shutDown();
+    		while (true) {
+    			System.out.println("Waiting for new Client.");
+    			clientSock = sock.accept();
+    			System.out.println("Received new connection.");
+    			System.out.println("socket" + clientSock.getInetAddress());
+    			Peer server = new Peer(name, clientSock);
+    			Thread clientHandler = new Thread(server);
+    			clientHandler.start();
+    			server.handleTerminalInput();
+    			server.shutDown();
+    		}
     	} catch (IOException e) {
     		System.out.println(e);
     	}

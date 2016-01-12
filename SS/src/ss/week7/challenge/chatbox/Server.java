@@ -19,7 +19,7 @@ public class Server extends Thread {
     private MessageUI mui;
     private Collection<ClientHandler> threads;
 
-    /** Constructs a new Server object */
+    /** Constructs a new Server object. */
     public Server(int portArg, MessageUI muiArg) {
         // TODO Add implementation
     }
